@@ -1,0 +1,41 @@
+<template name="publicProfile">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Public profile for: {{username}}</h1>
+        {{#if haveData}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              {{#if profileImage}}
+                <img src="{{profileImage.url}}" alt="Profile image" class="img-thumbnail img-public">
+              {{/if}}
+            </div> <!-- /.panel-heading -->
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  Full name: {{user.profile.fullName}}
+                </li>
+                <li class="list-group-item">
+                  Location: {{user.profile.location}}
+                </li>
+                <li class="list-group-item">
+                  Birthday: {{profileDate user.profile.birthday}}
+                </li>
+                <li class="list-group-item">
+                  <h4>Select an album to view:</h4>
+                  {{#each albums}}
+                    <a href="/public/{{username}}/album/{{name}}" class="album-link">{{name}}</a>
+                  {{else}}
+                    <p>No albums available</p>
+                  {{/each}}
+                </li>
+              </ul>
+            </div> <!-- /.panel-body -->
+          </div> <!-- /.panel -->
+        {{else}}
+          <p>This user's profile is not public</p>
+        {{/if}}
+      </div> <!-- /.col-md-8 -->
+    </div> <!-- /.row -->
+  </div> <!-- /.container -->
+</template>

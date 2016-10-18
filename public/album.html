@@ -1,0 +1,20 @@
+<template name="publicAlbum">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-8">
+        <h1>{{username}}'s public album: <strong>{{albumName}}</strong></h1>
+        <hr>
+        {{#each photos}}
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="{{url}}" alt="Image">
+            </div> <!-- /.thumbnail -->
+          </div> <!-- /.col-md-4 -->
+        {{else}}
+          <p>This album appears to be empty</p>
+        {{/each}}
+      </div> <!-- /.col-md-8 -->
+    </div> <!-- /.row -->
+    <a href="/public/profile/{{username}}" class="btn btn-primary">Back to profile</a>
+  </div> <!-- /.container -->
+</template>

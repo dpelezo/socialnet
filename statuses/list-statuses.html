@@ -1,0 +1,56 @@
+<template name="listStatuses">
+  <div class="col-md-10">
+    <hr>
+    {{#if Template.subscriptionsReady}}
+      {{#each statuses}}
+        <div class="well status">
+          <div class="media">
+            {{#each images owner}}
+              <div class="media-left">
+                <img src="{{url}}" alt="Profile image" class="media-object img-thumbnail">
+              </div> <!-- /.media-left -->
+            {{/each}}
+            <div class="media-body">
+              {{#if isOwnerOfStatus owner}}
+                <button type="button" class="btn btn-warning btn-xs pull-right" data-action="removeStatus" title="Remove status">
+                  <i class="fa fa-minus"></i>
+                </button>
+              {{else}}
+                <div class="pull-right">
+                  {{#if hasLikedStatus _id}}
+                    <button type="button" class="btn btn-danger btn-xs" data-action="dislikeStatus" title="Dislike status">
+                      <i class="fa fa-thumbs-down"></i>
+                    </button>
+                  {{else}}
+                    <button type="button" class="btn btn-success btn-xs" data-action="likeStatus" title="Like status">
+                      <i class="fa fa-thumbs-up"></i>
+                    </button>
+                  {{/if}}
+                </div> <!-- /.pull-right -->
+              {{/if}}
+              <p>
+                <strong>{{firstName}}</strong> posted on
+                <strong>{{statusDate createdAt}}</strong>
+              </p>
+              <p>{{status}}</p>
+              {{#if statusHasLikes}}
+                <p class="text-success">
+                  {{likesData.howMany}} {{likesData.notation}} this status:
+                  {{#each likesData.people}}
+                    <span>{{firstName}}</span>
+                  {{/each}}
+                </p>
+              {{/if}}
+              {{> addComment}}
+              {{> listComments statusId=_id}}
+            </div> <!-- /.media-body -->
+          </div> <!-- /.media -->
+        </div> <!-- /.status -->
+      {{else}}
+        <p>Nothing found</p>
+      {{/each}}
+    {{else}}
+      <p>Loading data...</p>
+    {{/if}}
+  </div> <!-- /.col-md-10 -->
+</template>
